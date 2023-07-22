@@ -44,7 +44,8 @@ local function Reset()
 end
 
 local function OpenScript(targetScript)
-	local uuid = HttpService:GenerateGUID(false)
+	--local uuid = HttpService:GenerateGUID(false) Why create an unmemorable guid if it still acesses the same script location? In both situations, if a script changes its name, neither an original name or a special guid will work if tried to be accessed in the same location.
+    local uuid = targetScript.Name --so just use the script name XD
 	
 	local success, message = NetworkBridge.OpenScript(GuiController.GetPort(), uuid, targetScript.Source, GuiController.GetEditor())
 	if not success then
@@ -115,7 +116,7 @@ GuiController.ValueChange:connect(function(newPort, newEditor)
 end)
 
 while true do
-	wait(1)
+	task.wait(1)
 	if hasOpened then
 		Step()
 	end
@@ -180,7 +181,7 @@ function GuiController.LoadValues(savedPort, savedEditor)
 	editor = savedEditor
 	editorBox.Text = savedEditor
 	-- Allow changed events to run before undoing their warning text work.
-	coroutine.yield()
+	-- coroutine.yield() PLEASE dont yeld a main thread
 	fieldsDirty = false
 	warningText.Text = ""
 end
