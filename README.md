@@ -1,4 +1,4 @@
-# Rbx-extedit
+# rbx-external-editor
 
 ⚠️ Forked my own version of MemoryPenguin's repository because his it's pretty much dead not updated from 2016. Fixed minor code mistakes that made the module unusable. In the future i will try to make my own project with heavy improvements for performance, stability and more.
 
